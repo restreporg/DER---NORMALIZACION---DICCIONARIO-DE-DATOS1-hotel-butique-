@@ -1,0 +1,82 @@
+CREATE DATABASE hotelbutique3;
+
+USE hotelbutique3;
+--
+
+CREATE TABLE huespedes3 (
+id INT (10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nacionalidad VARCHAR(40) NULL,
+correo VARCHAR(100) NOT NULL UNIQUE,
+nombre_completo VARCHAR(40) NOT NULL,
+telefono VARCHAR(15) NOT NULL,
+dni VARCHAR(13) NOT NULL UNIQUE
+);
+
+DESCRIBE huespedes3;
+
+
+--
+
+CREATE TABLE tipo_habitacion3 ( 
+id INT (10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+individual VARCHAR(40) NOT NULL,
+suite VARCHAR(40) NOT NULL,
+doble VARCHAR(40) NOT NULL
+);
+
+DESCRIBE tipo_habitacion3;
+
+--
+CREATE TABLE caracteristica_especial3 (
+id INT (10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+jacuzzi VARCHAR (40)NOT NULL,
+vista_al_mar VARCHAR(40)NOT NULL,
+balcon VARCHAR(40)NOT NULL
+);
+
+DESCRIBE caracteristica_especial3;
+
+--
+CREATE TABLE servicios_adicionales3 (
+id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+spa VARCHAR(40)NOT NULL,
+lavanderia VARCHAR(40)NOT NULL,
+room_service VARCHAR(40)NOT NULL,
+fecha_solicitud DATETIME NOT NULL,
+costo DECIMAL (10.5) NOT NULL
+);
+
+DESCRIBE servicios_adicionales3;
+
+
+--
+CREATE TABLE habitaciones3(
+id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+tarifa_noche DECIMAL(10.5)NOT NULL,
+piso VARCHAR(40)NOT NULL,
+FOREIGN KEY(id) REFERENCES caracteristica_especial3 (id),
+FOREIGN KEY(id) REFERENCES tipo_habitacion3 (id),
+FOREIGN KEY(id) REFERENCES servicios_adicionales3 (id)
+
+);
+
+DESCRIBE habitaciones3;
+
+
+--
+
+CREATE TABLE reservaciones3 (
+id INT (10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+fecha_entrada DATE NOT NULL,
+fecha_salida DATE NOT NULL,
+numero_de_huespedes INT NOT NULL,
+estado_del_pago VARCHAR (40) NOT NULL,
+FOREIGN KEY (id) REFERENCES huespedes3 (id),
+FOREIGN KEY (id) REFERENCES habitaciones3 (id)
+
+);
+
+DESCRIBE reservaciones3;
+
+--
+
